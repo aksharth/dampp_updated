@@ -403,7 +403,7 @@ const Dashboard = ({t}) => {
             <div className="row">
                 <div className="col-12">
                     <Carousel>
-                        {ArcadeMissions.map((item, i) => <MissionItem key={i} data={item} topLogo={false} onAction={() => setModalState({ isOpen: true })} bottomComponent={<WidgetBottomComponent data={item} />} />)}
+                        {ArcadeMissions.map((item, i) => <MissionItem key={i} data={item} t={t} topLogo={false} onAction={() => setModalState({ isOpen: true })} bottomComponent={<WidgetBottomComponent data={item}  />} />)}
                     </Carousel>
                 </div>
             </div>
