@@ -10,10 +10,14 @@ import {
 import * as serumCmn from '@project-serum/common';
 import * as spl from '@solana/spl-token';
 
+import { withTranslation, useTranslation } from 'react-i18next';
+
 const request = require("axios");
 const TOKEN_PROGRAM_ID = new PublicKey('TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA');
 
 const WidgetBottomComponent = (props) => {
+    const {t} = useTranslation()
+
     const [modalState, setModalState] = useState({ isOpen: false });
     const [MissionState, setMissionState] = useState(
         {
@@ -31,12 +35,12 @@ const WidgetBottomComponent = (props) => {
 
     return (
         <div className="home-widget-bottom">
-            <a href='#' className="action-component text-link" onClick={() => { setModalState({ isOpen: true }); setMissionState(props.data) }}>Details</a>
+            <a href='#' className="action-component text-link" onClick={() => { setModalState({ isOpen: true }); setMissionState(props.data) }}>{t('pages.dashboard.mission_pool_details_link')}</a>
         </div>
     );
 }
 
-const Dashboard = () => {
+const Dashboard = ({t}) => {
     const opts = {
         preflightCommitment: "processed"
     }
@@ -258,18 +262,18 @@ const Dashboard = () => {
     }
 
     return (
-        <Page title="Dashboard">
+        <Page title={t('pages.dashboard.html_page_title')}>
             <div className="row">
                 <div className="col-12 col-sm-4 col-lg-4">
                     <div className="card shadow-widget h-100">
                         <div className="card-body">
                             <div className="card-header-title">
-                                <h3 className="card-title text-center text-gradient">Wallet</h3>
+                                <h3 className="card-title text-center text-gradient">{t('pages.dashboard.wallet_header')}</h3>
                             </div>
                             <div className="dashboard-widget-body">
                                 <div className="list-item">
                                     <div className="list-label">
-                                        Address
+                                    Address
                                     </div>
                                     <div className="list-value">
                                         {publicKey ? publicKey.toBase58() : "xxxxxxxxxxxxxxxxx"}
@@ -277,7 +281,7 @@ const Dashboard = () => {
                                 </div>
                                 <div className="list-item">
                                     <div className="list-label">
-                                        ARCADE Balance
+                                    {t('pages.dashboard.wallet_header')} ARCADE Balance
                                     </div>
                                     <div className="list-value">
                                         <span className='balance-text'>{ArcadeTokenAccounts.arcade} ARCADE</span>
@@ -305,12 +309,12 @@ const Dashboard = () => {
                     <div className="card shadow-widget h-100">
                         <div className="card-body">
                             <div className="card-header-title">
-                                <h3 className="card-title text-center text-gradient">Rewards</h3>
+                                <h3 className="card-title text-center text-gradient">{t('pages.dashboard.rewards_header')}</h3>
                             </div>
                             <div className="dashboard-widget-body">
                                 <div className="list-item">
                                     <div className="list-label">
-                                        Rewards Balance
+                                    {t('pages.dashboard.rewards_balance')}
                                     </div>
                                     <div className="list-value">
                                         <span className='balance-text'>{ArcadeRewards.unpaid} xARCADE</span>
@@ -327,7 +331,7 @@ const Dashboard = () => {
 
                                 <div className="list-item">
                                     <div className="list-label">
-                                        <button className="btn btn-primary btn-action" style={{ width: "100%" }}>Claim</button>
+                                        <button className="btn btn-primary btn-action" style={{ width: "100%" }}>{t('pages.dashboard.rewards_withdraw_button')}</button>
                                     </div>
                                 </div>
                             </div>
@@ -338,7 +342,7 @@ const Dashboard = () => {
                     <div className="card shadow-widget h-100">
                         <div className="card-body">
                             <div className="card-header-title">
-                                <h3 className="card-title text-center text-gradient">Bonus Pool Rankings</h3>
+                                <h3 className="card-title text-center text-gradient">{t('pages.dashboard.bonus_pool_rankings_header')}</h3>
                             </div>
                             <div className="dashboard-widget-body">
                                 <div className="list-item">
@@ -394,7 +398,7 @@ const Dashboard = () => {
             </div>
 
             <section className="hero-page-title-section">
-                <h1 className="page-title font-24">Active Pool Mission</h1>
+                <h1 className="page-title font-24">{t('pages.dashboard.active_pool_mission_title')}</h1>
             </section>
             <div className="row">
                 <div className="col-12">
@@ -415,4 +419,4 @@ const Dashboard = () => {
     );
 }
 
-export default Dashboard;
+export default withTranslation()(Dashboard);

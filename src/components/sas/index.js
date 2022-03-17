@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons'
 import { DemoBalanceContext } from '../../context/demo-accounts'
+import { useTranslation } from 'react-i18next';
 
 const request = require("axios");
 const ExchangeDivider = styled.div`
@@ -26,6 +27,8 @@ const ExchangeDivider = styled.div`
 `;
 
 const SAS = (props) => {
+
+
     const { ArcadeTokenAccounts, setArcadeTokenAccounts, currency, setCurrency, direction, setDirection, amount, setAmount } = useContext(
         DemoBalanceContext
       );
@@ -51,7 +54,9 @@ const SAS = (props) => {
     }
     return (
         <div>
-            <ExchangeField balance={ArcadeTokenAccounts} label="From" className={"mt-3"} token={currency.from}  />
+            <ExchangeField balance={ArcadeTokenAccounts} label={props.t('pages.single_asset_staking.swap_from_label')} className={"mt-3"} token={currency.from}  
+            t={props.t}
+            />
 
             <ExchangeDivider>
                 <button type='button' onClick={() => {
@@ -65,7 +70,7 @@ const SAS = (props) => {
                 </button>
             </ExchangeDivider>
 
-            <ExchangeField balance={ArcadeTokenAccounts} label="To (Estimate)" token={currency.to} />
+            <ExchangeField balance={ArcadeTokenAccounts} label={props.t('pages.single_asset_staking.swap_to_label')} token={currency.to} />
 
             <div className='d-flex align-items-center justify-content-between mt-3'>
                 <div className='text-label'></div>
@@ -80,7 +85,7 @@ const SAS = (props) => {
                     swapFunction();
                 }}>
                     {/* <FontAwesomeIcon icon={faExchangeAlt}/> */}
-                    <span>SWAP</span>
+                    <span>{props.t('pages.single_asset_staking.swap_button')}</span>
                 </a>
             </div>
             <div className='mt-4 mb-3'><span className={"text-label"}>{(direction ? disclaimer : '')}</span></div>

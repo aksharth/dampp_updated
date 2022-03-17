@@ -1,9 +1,10 @@
 import React, { useState, useEffect, createContext } from 'react';
 import { Page, Carousel, MissionItem, MissionItemModal } from '../../components'
 import { DemoBalanceContext } from '../../context/demo-accounts'
+import { withTranslation } from 'react-i18next';
 
 const request = require("axios");
-const MissionPools = (props) => {
+const MissionPools = ({t}) => {
     const [modalState, setModalState] = useState({ isOpen: false });
     const [MissionState, setMissionState] = useState({
         _id: "",
@@ -60,11 +61,12 @@ const MissionPools = (props) => {
     }, []);
 
     return (
-        <Page title="Mission Pools">
+        <Page title={t('pages.mission_pools.html_page_title')}>
             <div className="row">
                 <div className="col-12">
                     <Carousel>
-                        {ArcadeMissions.map((item, i) => <MissionItem key={i} data={item} actionButton={true} onAction={() => {setModalState({ isOpen: true }); setMissionState(item)}} />)}
+                        {ArcadeMissions.map((item, i) => <MissionItem key={i} data={item} actionButton={true} onAction={() => {setModalState({ isOpen: true }); setMissionState(item)}}
+                        t={t} />)}
                     </Carousel>
                 </div>
             </div>
@@ -80,4 +82,4 @@ const MissionPools = (props) => {
     );
 }
 
-export default MissionPools;
+export default withTranslation()(MissionPools);

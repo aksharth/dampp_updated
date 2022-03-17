@@ -19,7 +19,10 @@ import "../../assets/pugin/slicknav/jquery.slicknav.min.js";
 import MobileMenu from "../mobile-menu";
 import SideWallet from "../../pages/SideWallet/SideWallet"
 
-const Header = (props) => {
+import {withTranslation} from "react-i18next"
+
+const Header = ({t}) => {
+
   
   return (
     <div className="topbar">
@@ -54,7 +57,7 @@ const Header = (props) => {
                 exact
                 activeClassName="active"
               >
-                <span>Dashboard</span>
+                <span>{t('menu.dashboard')}</span>
               </NavLink>
             </li>
             <li className="nav-item ">
@@ -63,7 +66,7 @@ const Header = (props) => {
                 className="nav-link"
                 activeClassName="active"
               >
-                <span>Mission Pools</span>
+                <span>{t('menu.mission_pool')}</span>
               </NavLink>
             </li>
             <li className="nav-item ">
@@ -72,12 +75,12 @@ const Header = (props) => {
                 className="nav-link"
                 activeClassName="active"
               >
-                <span>Single Asset Staking</span>
+                <span>{t('menu.single_asset_staking')}</span>
               </NavLink>
             </li>
             <li className="nav-item ">
               <a href="https://raydium.io/swap/" className="nav-link" activeClassName="active">
-                <span>Swap</span>
+                <span>{t('menu.swap')}</span>
               </a>
             </li>
             <li className="nav-item ">
@@ -86,7 +89,7 @@ const Header = (props) => {
                 className="nav-link"
                 activeClassName="active"
               >
-                <span>Rewards</span>
+                <span>{t('menu.rewards')}</span>
               </NavLink>
             </li>
             <li className="nav-item ">
@@ -95,7 +98,7 @@ const Header = (props) => {
                 className="nav-link"
                 activeClassName="active"
               >
-                <span>Warchest</span>
+                <span>{t('menu.warchest')}</span>
               </NavLink>
             </li>
             <li className="nav-item ">
@@ -104,7 +107,7 @@ const Header = (props) => {
                 className="nav-link"
                 activeClassName="active"
               >
-                <span>Rankings</span>
+                <span>{t('menu.rankings')}</span>
               </NavLink>
             </li>
             <li className="nav-item "><button
@@ -128,4 +131,4 @@ const Header = (props) => {
   );
 };
 
-export default Header;
+export default withTranslation()(Header);

@@ -5,6 +5,7 @@ import styles from './styles.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGamepad } from '@fortawesome/free-solid-svg-icons'
+import { withTranslation, useTranslation } from 'react-i18next';
 
 import styled from 'styled-components';
 const request = require("axios");
@@ -14,6 +15,7 @@ const ItemStyle = styled.div`
 `;
 
 const CustomArrow = (props) => {
+    // const {t} = useTranslation()
     const { className, style, onClick } = props;
     return (
         <div>
@@ -53,15 +55,15 @@ const MissionItem = (props) => {
                         <div className="body-detail">
                             <ul className="detail-list">
                                 <li>
-                                    <div className="item-left">Pool size : </div>
+                                    <div className="item-left">{props.t('pages.mission_pools.pool_size_label')} </div>
                                     <div className="item-right">{props.data.max_pool_size}</div>
                                 </li>
                                 <li>
-                                    <div className="item-left">Duration : </div>
+                                    <div className="item-left">{props.t('pages.mission_pools.duration_label')} : </div>
                                     <div className="item-right">{props.data.duration} days</div>
                                 </li>
                                 <li>
-                                    <div className="item-left">Expected rewards : </div>
+                                    <div className="item-left">{props.t('pages.mission_pools.expecited_rewards_label')} : </div>
                                     <div className="item-right">{props.data.expected_rewards} {props.data.expected_rewards_coin}</div>
                                 </li>
                             </ul>
@@ -69,7 +71,7 @@ const MissionItem = (props) => {
                                 <div className="text-center my-4">
                                     <button type='button' onClick={props.onAction} className='btn btn-action '>
                                         <FontAwesomeIcon icon={faGamepad} />
-                                        <span>Enter Pools</span>
+                                        <span>{props.t('pages.mission_pools.enter_pool_button')}</span>
                                     </button>
                                 </div>}
                         </div>
@@ -78,7 +80,7 @@ const MissionItem = (props) => {
                         {!props.bottomComponent &&
                             <>
                                 <div className="footerTitle">
-                                    Sponsored By
+                                   {props.t('pages.mission_pools.sponsored_by_label')} 
                                 </div>
                                 <div className="sponsored-list">
                                     <ul className="list-inline d-flex justify-content-sm-around">

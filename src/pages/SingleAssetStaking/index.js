@@ -28,10 +28,12 @@ const ExchangeDivider = styled.div`
         }   
     }
 `;
+import { useTranslation } from 'react-i18next';
 
 
 
 const SingleAssetStaking = (props) => {
+    const {t} = useTranslation()
 
     const [ArcadeTokenAccounts, setArcadeTokenAccounts] = useState({ arcade: 0, xarcade: 0 });
     async function getAccountBalances() {
@@ -52,7 +54,7 @@ const SingleAssetStaking = (props) => {
     }, []);
 
     return (
-        <Page title="Single Asset Staking">
+        <Page title={t('pages.single_asset_staking.html_page_title')}>
             <div className='row'>
                 <div className='col-sm-6 mx-auto'>
                     <div className='card shadow-widget gradient-card'>
@@ -61,7 +63,7 @@ const SingleAssetStaking = (props) => {
                 value={{ ArcadeTokenAccounts, setArcadeTokenAccounts, currency, setCurrency, direction, setDirection, amount, setAmount }}
             >
                             <StepWizard>
-                                <SAS />
+                                <SAS t={t}/>
                                 <SuccessSwap />
                             </StepWizard>
                             </DemoBalanceContext.Provider>

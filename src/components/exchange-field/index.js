@@ -59,14 +59,17 @@ const FieldGroup = styled.div`
         }
     }
 `;
-
+import { useTranslation } from 'react-i18next';
 
 const ExchangeField = (props) => {
+    const {t} = useTranslation()
     return (
         <FieldGroup className={props.className}>
             <div className='d-flex justify-content-between'>
                 <label>{props.label}</label>
-                <p className='helper-text'>Balance : {(props.token == "xARCADE" ? props.balance.xarcade : props.balance.arcade)}</p>
+                <p className='helper-text'>
+                    {t('pages.single_asset_staking.swap_balance_label')}
+                    : {(props.token == "xARCADE" ? props.balance.xarcade : props.balance.arcade)}</p>
 
             </div>
 
