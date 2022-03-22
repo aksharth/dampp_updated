@@ -419,7 +419,7 @@ const Dashboard = (props) => {
                     t={t}
                     data={MissionState} account={{ arcade: ArcadeTokenAccounts.arcade, xarcade: ArcadeTokenAccounts.xarcade, rewards: ArcadeRewards }}
                     isOpen={modalState.isOpen}
-                    closeModal={() => setModalState({ isOpen: false })} t={t} />
+                    closeModal={() => setModalState({ isOpen: false })} />
             </DemoBalanceContext.Provider>
         </Page>
     );

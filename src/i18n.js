@@ -9,6 +9,7 @@ import fr from "./languages/fr/translation.json"
 import ko from "./languages/ko/translation.json"
 import zhCN from "./languages/zh-CN/translation.json"
 import zhTW from "./languages/zh-TW/translation.json"
+import hi from "./languages/hi/translation.json"
 
 
 const resources = {
@@ -19,7 +20,7 @@ const resources = {
     ko: { translation: ko },
     zhCN: { translation: zhCN },
     zhTW: { translation: zhTW },
-    
+    hi:{translation:hi}
 }
 
 i18n
@@ -27,6 +28,7 @@ i18n
     .use(languagedetector)
     .init({
         resources,
+        // lng:"hi",
         interpolation: {
             escapeValue: false // react already safes from xss
         }
