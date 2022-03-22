@@ -26,7 +26,7 @@ import App from './App';
 const Root = () => {
     const network = WalletAdapterNetwork.Devnet;
 
-    const endpoint = useMemo(() => clusterApiUrl(network), [network]);
+    const endpoint = useMemo(() => clusterApiUrl("devnet"), [network]);
 
     const wallets = useMemo(
         () => [

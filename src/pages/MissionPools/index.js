@@ -1,10 +1,11 @@
 import React, { useState, useEffect, createContext } from 'react';
 import { Page, Carousel, MissionItem, MissionItemModal } from '../../components'
 import { DemoBalanceContext } from '../../context/demo-accounts'
-import { withTranslation } from 'react-i18next';
+import { withTranslation, useTranslation } from 'react-i18next';
 
 const request = require("axios");
-const MissionPools = ({t}) => {
+const MissionPools = (props) => {
+    const {t} = useTranslation();
     const [modalState, setModalState] = useState({ isOpen: false });
     const [MissionState, setMissionState] = useState({
         _id: "",
@@ -36,7 +37,7 @@ const MissionPools = ({t}) => {
 
     async function getMissionPool() {
         const res = await request.get('http://arcade.api.private.aioxperts.com/api/demo/missions')
-        console.log(res.data)
+        console.log("missionPool Data", res.data)
         setArcadeMissions(res.data)
     }
 

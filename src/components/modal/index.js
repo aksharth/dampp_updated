@@ -21,7 +21,7 @@ const MissionItemModal = (props) => {
 
     useEffect(() => {
         setHandler((eventName) => {
-            console.log(eventName);
+            console.log("EventName", eventName);
         })
         setAlertState({
             type:null
@@ -42,7 +42,6 @@ const MissionItemModal = (props) => {
             <StepWizard>
                 <MissionDetail data={props.data} />
                 <StackForm data={props.data} account={props.account} updateState={(state) => { setAlertState({...alertState, ...state}); 
-                    console.log(alertState);
                     }}/>
                 <SuccessAlert amount={alertState.amount} type={alertState.type} closeModal={props.closeModal}/>
             </StepWizard>

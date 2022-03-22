@@ -20,6 +20,7 @@ const StackForm = (props) => {
     const [StakedAccount, setStakedAccount] = useState(0);
     const [amountToStake, setAmountToStake] = useState(0.00)
     async function getStakedAmount() {
+        console.log("props on stackForm: ", props.data)
         const res = await request.get(`http://arcade.api.private.aioxperts.com/api/demo/mission/staked/${props.data.mission_mint}/RCade47ZKErNcQB1CgkpEZUEmyfsqi2qh21mSCWASgm`)
         console.log('staked: ', res.data)
         setStakedAccount(res.data)

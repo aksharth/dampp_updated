@@ -40,7 +40,8 @@ const WidgetBottomComponent = (props) => {
     );
 }
 
-const Dashboard = ({t}) => {
+const Dashboard = (props) => {
+    const {t} = useTranslation()
     const opts = {
         preflightCommitment: "processed"
     }
@@ -52,8 +53,9 @@ const Dashboard = ({t}) => {
     const [tokenAccounts, setTokenAccounts] = useState(undefined);
     const [ArcadeTokenAccounts, setArcadeTokenAccounts] = useState({ arcade: 0, xarcade: 0 });
     const [ArcadeRewards, setArcadeRewards] = useState({ unpaid: 0, total: 0 });
-    const possibleFromWallets = tokenAccounts === undefined ? [] :
-        tokenAccounts.filter((ta) => { console.log('ta.account', ta.account); ta.account.mint.equals("") });
+    /*const possibleFromWallets = tokenAccounts === undefined ? [] :
+        tokenAccounts.filter((ta) => { console.log('ta.account', ta.account); 
+        ta.account.mint.equals("") });*/
     const [ArcadeMissions, setArcadeMissions] = useState([{
         _id: "",
         mission_mint: "",
@@ -89,7 +91,7 @@ const Dashboard = ({t}) => {
     }
 
     async function getProvider() {
-        const connection = new Connection(clusterApiUrl.toString(), opts.preflightCommitment);
+        const connection = new Connection(clusterApiUrl("devnet"), opts.preflightCommitment);
         const provider = new Provider(
             connection, wallet, opts.preflightCommitment
         )
@@ -198,30 +200,29 @@ const Dashboard = ({t}) => {
 
     async function initTokenAccounts() {
         if (tokenAccounts === undefined && anchorWallet !== null) {
-            console.log('here')
-            const accounts = await listOwnedTokenAccounts();
-            console.log("Accounts: ", accounts);
-            setTokenAccounts(accounts);
+            //const accounts = await listOwnedTokenAccounts();
+            //console.log("Accounts: ", accounts);
+            //setTokenAccounts(accounts);
         }
     }
 
-    async function listOwnedTokenAccounts() {
+   /*async function listOwnedTokenAccounts() {
         const accounts = await getOwnedTokenAccounts(connection, publicKey);
         return accounts;
-    }
+    }*/
     const asdf = useEffect(async () => {
         
         await getAccountBalances();
         await getRewardBalances();
         await getMissionPool();
         return 0;
-    }, []);
+    }, [wallet]);
 
     useEffect( async () =>{
         initTokenAccounts();
         const tokenAccount = await serumCmn.getTokenAccount(getProvider(), new web3.PublicKey(wallet));
           const balance = tokenAccount.amount.toNumber();
-          console.log(balance);
+          console.log("balance", balance);
     },[wallet])
 
     async function checkBalance(wallet, set) {
@@ -234,7 +235,7 @@ const Dashboard = ({t}) => {
             setError(undefined);
             const tokenAccount = await serumCmn.getTokenAccount(program.provider, new web3.PublicKey(wallet));
             const balance = tokenAccount.amount.toNumber();
-            console.log(balance);
+            console.log("balance2",balance);
             set(balance);
         } catch (err) {
             setError("Failed to read token balance");
@@ -245,13 +246,17 @@ const Dashboard = ({t}) => {
 
 
     async function getAccountBalances() {
-        const res = await request.get('http://arcade.api.private.aioxperts.com/api/demo/wallet/RCade47ZKErNcQB1CgkpEZUEmyfsqi2qh21mSCWASgm')
-        setArcadeTokenAccounts(res.data)
+        if(publicKey){
+            const res = await request.get('http://arcade.api.private.aioxperts.com/api/demo/wallet/RCade47ZKErNcQB1CgkpEZUEmyfsqi2qh21mSCWASgm')
+            setArcadeTokenAccounts(res.data)
+        }
     }
 
     async function getRewardBalances() {
-        const res = await request.get('http://arcade.api.private.aioxperts.com/api/demo/rewards/RCade47ZKErNcQB1CgkpEZUEmyfsqi2qh21mSCWASgm')
-        setArcadeRewards({ unpaid: res.data.unpaid, total: res.data.total })
+        if(publicKey){
+            const res = await request.get('http://arcade.api.private.aioxperts.com/api/demo/rewards/RCade47ZKErNcQB1CgkpEZUEmyfsqi2qh21mSCWASgm')
+            setArcadeRewards({ unpaid: res.data.unpaid, total: res.data.total })
+        }
     }
 
     async function getMissionPool() {
@@ -411,9 +416,10 @@ const Dashboard = ({t}) => {
                 value={{ ArcadeRewards, ArcadeTokenAccounts, setArcadeRewards, setArcadeTokenAccounts, getAccountBalances }}
             >
                 <MissionItemModal
+                    t={t}
                     data={MissionState} account={{ arcade: ArcadeTokenAccounts.arcade, xarcade: ArcadeTokenAccounts.xarcade, rewards: ArcadeRewards }}
                     isOpen={modalState.isOpen}
-                    closeModal={() => setModalState({ isOpen: false })} />
+                    closeModal={() => setModalState({ isOpen: false })} t={t} />
             </DemoBalanceContext.Provider>
         </Page>
     );

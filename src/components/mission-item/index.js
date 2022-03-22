@@ -25,8 +25,9 @@ const CustomArrow = (props) => {
 }
 
 const MissionItem = (props) => {
+    const {t} = useTranslation();
     const [game_image, setGameImage] = useState("assets/images/star-atlas.png")
-
+    //console.log("MissionItem Props", props)
     const asdf = useEffect(() => {
         switch (props.data.game) {
             case "Star_Atlas":
@@ -55,15 +56,15 @@ const MissionItem = (props) => {
                         <div className="body-detail">
                             <ul className="detail-list">
                                 <li>
-                                    <div className="item-left">{props.t('pages.mission_pools.pool_size_label')} </div>
+                                    <div className="item-left">{t('pages.mission_pools.pool_size_label')} </div>
                                     <div className="item-right">{props.data.max_pool_size}</div>
                                 </li>
                                 <li>
-                                    <div className="item-left">{props.t('pages.mission_pools.duration_label')} : </div>
+                                    <div className="item-left">{t('pages.mission_pools.duration_label')} : </div>
                                     <div className="item-right">{props.data.duration} days</div>
                                 </li>
                                 <li>
-                                    <div className="item-left">{props.t('pages.mission_pools.expecited_rewards_label')} : </div>
+                                    <div className="item-left">{t('pages.mission_pools.expecited_rewards_label')} : </div>
                                     <div className="item-right">{props.data.expected_rewards} {props.data.expected_rewards_coin}</div>
                                 </li>
                             </ul>
@@ -71,7 +72,7 @@ const MissionItem = (props) => {
                                 <div className="text-center my-4">
                                     <button type='button' onClick={props.onAction} className='btn btn-action '>
                                         <FontAwesomeIcon icon={faGamepad} />
-                                        <span>{props.t('pages.mission_pools.enter_pool_button')}</span>
+                                        <span>{t('pages.mission_pools.enter_pool_button')}</span>
                                     </button>
                                 </div>}
                         </div>
@@ -80,7 +81,7 @@ const MissionItem = (props) => {
                         {!props.bottomComponent &&
                             <>
                                 <div className="footerTitle">
-                                   {props.t('pages.mission_pools.sponsored_by_label')} 
+                                   {t('pages.mission_pools.sponsored_by_label')} 
                                 </div>
                                 <div className="sponsored-list">
                                     <ul className="list-inline d-flex justify-content-sm-around">

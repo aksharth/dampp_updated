@@ -30,7 +30,6 @@ function SideWallet() {
             connection
               .getParsedAccountInfo(new PublicKey(item.pubkey.toBase58()))
               .then((res) => {
-                console.log(res);
                 const tokenAddress = res.value.data.parsed.info.mint;
                 //Arcade token address
                 const arcadeAddress =
