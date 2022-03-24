@@ -36,8 +36,11 @@ const MissionItem = (props) => {
             case "Illuvium":
                 setGameImage("assets/images/illuvium.png");
                 break;
+            default :
+                setGameImage("assets/images/star-atlas.png")
         }
-    }, [])
+    }, [props.data])
+
     return (
         <ItemStyle>
             <div className="card shadow-widget hover hover__slide-up pool-item">
