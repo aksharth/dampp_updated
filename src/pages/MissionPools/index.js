@@ -44,6 +44,66 @@ const MissionPools = (props) => {
             duration: 0,
             expected_rewards: 0,
             expected_rewards_coin: "",
+            game: "Star Atlas",
+            default_image: "",
+            description: ""
+        },
+        {
+            _id: "",
+            mission_mint: "",
+            title: "",
+            max_pool_size: 0,
+            duration: 0,
+            expected_rewards: 0,
+            expected_rewards_coin: "",
+            game: "Star Atlas",
+            default_image: "",
+            description: ""
+        },
+        {
+            _id: "",
+            mission_mint: "",
+            title: "",
+            max_pool_size: 0,
+            duration: 0,
+            expected_rewards: 0,
+            expected_rewards_coin: "",
+            game: "Star Atlas",
+            default_image: "",
+            description: ""
+        },
+        {
+            _id: "",
+            mission_mint: "",
+            title: "",
+            max_pool_size: 0,
+            duration: 0,
+            expected_rewards: 0,
+            expected_rewards_coin: "",
+            game: "Star Atlas",
+            default_image: "",
+            description: ""
+        },
+        {
+            _id: "",
+            mission_mint: "",
+            title: "",
+            max_pool_size: 0,
+            duration: 0,
+            expected_rewards: 0,
+            expected_rewards_coin: "",
+            game: "Illuvium",
+            default_image: "",
+            description: ""
+        },
+        {
+            _id: "",
+            mission_mint: "",
+            title: "",
+            max_pool_size: 0,
+            duration: 0,
+            expected_rewards: 0,
+            expected_rewards_coin: "",
             game: "Illuvium",
             default_image: "",
             description: ""
@@ -73,8 +133,7 @@ const MissionPools = (props) => {
             description: ""
         },
     ])
-    const [filteredMissions, setFilterMission] = useState([ArcadeMissions[0]])
-
+    const [filteredMissions, setFilterMission] = useState(ArcadeMissions.filter(item => item.game == gameOption[0]))
 
     const [ArcadeTokenAccounts, setArcadeTokenAccounts] = useState({ arcade: 0, xarcade: 0 });
     const [ArcadeRewards, setArcadeRewards] = useState({ amount: 0 });
@@ -112,33 +171,8 @@ const MissionPools = (props) => {
 
 
 
-                    <div className="row ">
-                        <div className="col-12">
-                            <Carousel>
-                                {
-                                    filteredMissions.map((item, i) => {
-                                        return (
-                                            <MissionItem key={i} data={item} actionButton={true} onAction={() => { setModalState({ isOpen: true }); setMissionState(item) }}
-                                                t={t} />
-                                        )
-                                    })}
-                            </Carousel>
-                        </div>
-                    </div>
-
-                    <DemoBalanceContext.Provider
-                        value={{ ArcadeRewards, ArcadeTokenAccounts, setArcadeRewards, setArcadeTokenAccounts, getAccountBalances }}
-                    >
-                        <MissionItemModal
-                            data={MissionState} account={{ arcade: ArcadeTokenAccounts.arcade, xarcade: ArcadeTokenAccounts.xarcade, rewards: ArcadeRewards }}
-                            isOpen={modalState.isOpen}
-                            closeModal={() => setModalState({ isOpen: false })} />
-                    </DemoBalanceContext.Provider>
-                </Page>
-            </div>
-
-
-            <div className='dropdown order-1 align-self-end' style={{marginRight:"2rem"}}>
+                    <div className='d-flex flex-column'>
+                    <div className='dropdown order-0 align-self-end' style={{ marginRight: "2rem" }}>
                 <button className='btn  dropdown-toggle text-white fw-bold' style={{ backgroundColor: "#53095d" }} type='button' data-bs-toggle='dropdown' area-aria-expanded='false'>
                     {filteredMissions[0].game}
                 </button>
@@ -160,6 +194,45 @@ const MissionPools = (props) => {
 
 
             </div>
+                    <div className="row order-1">
+                        <div className="col-12">
+                            {/* <Carousel> */}
+                            <div className="container">
+                                <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+                                    
+                               
+                            {
+                                filteredMissions.map((item, i) => {
+                                    return (
+                                        <div className="col">
+                                            <MissionItem key={i} data={item} actionButton={true} onAction={() => { setModalState({ isOpen: true }); setMissionState(item) }}
+                                        t={t} />
+                                        </div>
+                                        
+                                        )
+                                    })}
+                                    
+                                    </div>
+                            </div>
+                                    </div>
+                            {/* </Carousel> */}
+                        </div>
+
+                    </div>
+
+                    <DemoBalanceContext.Provider
+                        value={{ ArcadeRewards, ArcadeTokenAccounts, setArcadeRewards, setArcadeTokenAccounts, getAccountBalances }}
+                    >
+                        <MissionItemModal
+                            data={MissionState} account={{ arcade: ArcadeTokenAccounts.arcade, xarcade: ArcadeTokenAccounts.xarcade, rewards: ArcadeRewards }}
+                            isOpen={modalState.isOpen}
+                            closeModal={() => setModalState({ isOpen: false })} />
+                    </DemoBalanceContext.Provider>
+                </Page>
+            </div>
+
+
+           
         </div>
     );
 }

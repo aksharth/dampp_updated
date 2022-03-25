@@ -30,7 +30,7 @@ const SuccessSwap = (props) => {
                     {result}
                     <p className='font-12'>Transaction : 0x8497c1ebb18cc3cb677989b25e553585db11ed3652d08f8265a24cc2513ff020</p>
 
-                    <button type='button' className='btn btn-action px-5 mt-5'>Close</button>
+                    <button type='button' className='btn btn-action px-5 mt-5' onClick={()=>props.previousStep()}>Close</button>
                 </div>
             </div>
         </div>
